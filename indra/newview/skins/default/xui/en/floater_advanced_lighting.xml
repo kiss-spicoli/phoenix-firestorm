@@ -11,12 +11,88 @@
 
          <layout_stack name="settings_stack" width="370" height="900" follows="all" animate="false" orientation="horizontal">
 
+            <layout_panel border="false" name="lp_sun_moon_atmos" bevel_style="none" auto_resize="false" user_resize="false" height="850" width="164">
+               <tab_container follows="top|left" halign="center" name="tabs" layout="topleft" height="260" width="154" top="6" left="4" tab_group="0" tab_width="44" tab_position="top">
+                  <panel       follows="top|left" height="180" width="152" layout="topleft" border="false" name="sun_panel" bevel_style="in" auto_resize="false" user_resize="false" visible="true" font="SansSerifBold" label="Sun">
+                     <sun_moon_trackball follows="top|left" height="146" width="146" top="0" left="4" thumb_mode="sun" name="sun_rotation"/>
+                     <color_swatch follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="8" label_height="0" name="sun_color" can_apply_immediately="true"/>
+                     <text     follows="top|left" height="10" layout="topleft" top_pad="5" width="100" name="sun_elevation_label">Elevation</text>
+                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="-90" max_val="90" name="sun_elevation"  can_edit_text="true" />
+                     <text     follows="top|left" height="10" layout="topleft" top_pad="0" width="100" name="sun_azimuth_label">Azimuth</text>
+                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="0"  max_val="359" name="sun_azimuth"    can_edit_text="true" />
+                  </panel>
+                  <panel       follows="top|left" height="180" width="152" layout="topleft" border="false" name="moon_panel" bevel_style="in" auto_resize="false" user_resize="false" visible="true" font="SansSerifBold" label="Moon">
+                     <sun_moon_trackball follows="top|left" height="146" width="146" top="0" left="4" thumb_mode="moon" name="moon_rotation"/>
+                     <color_swatch follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="8" label_height="0" name="moon_color" can_apply_immediately="true"/>
+                     <text     follows="top|left" height="10" layout="topleft" top_pad="5" width="100" name="moon_elevation_label">Elevation</text>
+                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="-90" max_val="90" name="moon_elevation" can_edit_text="true" />
+                     <text     follows="top|left" height="10" layout="topleft" top_pad="0" width="100" name="moon_azimuth_label">Azimuth</text>
+                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="0"  max_val="359" name="moon_azimuth"   can_edit_text="true" />
+                  </panel>
+               </tab_container>
 
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="haze_density_label">Intensity</text>
+               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="0" left="8"  decimal_digits="1" min_val="0"   max_val="50"  increment="0.1"  can_edit_text="true" name="RenderHDRSkySunlightScale" control_name="RenderHDRSkySunlightScale" 
+                       tool_tip="Sunlight Brightness. Recommended: set the 'Sun' color swatch Luminance = 50."/>
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10"  name="haze_focus_label">Glow focus</text>
+               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="0" left="8"  decimal_digits="2" min_val="-2" max_val="2.00" increment="0.01" can_edit_text="true" name="glow_focus" 
+                       tool_tip="When > 0, Sun Glow appears in haze or clouds.  For interesting effects, try &lt; 0."/>
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="haze_size_label">Glow intensity</text>
+               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="0" left="8"  decimal_digits="2" min_val="0"  max_val="1.99" increment="0.01" can_edit_text="true" name="glow_size" 
+                       tool_tip="Sun Glow Focus must not be 0 for this to have a visible effect."/>
+<!-- KS: code from panel_settings_sky_atmos.xml.  Hidden pending binding to pipeline.
+               <text   follows="left|top" height="10" width="160" layout="topleft" top_pad="6" left="10" name="density_multiplier_label">Density Multiplier</text>
+               <slider follows="left|top" height="16" width="170" layout="topleft" top_pad="0" left="8"  decimal_digits="4" min_val="0.0001" max_val="2" increment="0.0001" can_edit_text="true" name="density_multiplier" control_name="density_multiplier"
+                       tool_tip="Fog/haze/glow density."/>
+               <text   follows="left|top" height="10" width="160" layout="topleft" top_pad="6" left="10" name="distance_multiplier_label">Distance Multiplier</text>
+               <slider follows="left|top" height="16" width="170" layout="topleft" top_pad="0" left="8"  decimal_digits="2" min_val="0.05" max_val="1000" increment="0.01" can_edit_text="true" name="distance_multiplier" control_name="distance_multiplier"
+                       initial_value="0.8" tool_tip="Fog/haze/glow multiplier for distance."/>
+               <text   follows="left|top" height="10" width="160" layout="topleft" top_pad="6" left="10" name="maximum_altitude_label">Maximum Altitude</text>
+               <slider follows="left|top" height="16" width="170" layout="topleft" top_pad="0" left="8"  decimal_digits="1" min_val="0" max_val="10000"  increment="0.1"   can_edit_text="true" name="max_alt" 
+                       tool_tip="fog/haze/glow maximum altitude."/>
+-->
+
+
+               <panel name="P_Ambient_Settings" follows="top|left" layout="topleft" top_pad="28" left="4" width="162" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
+                      <text name="T_Ambient_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="100">Ambient</text>
+               </panel>
+               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="ambient_light" can_apply_immediately="true" />
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="ambient_scale_label">Intensity</text>
+               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="2" left="8" decimal_digits="1" min_val="-10" max_val="40"  increment="0.1"  can_edit_text="true" name="RenderSkyAmbientScale" control_name="RenderSkyAmbientScale"
+                       tool_tip="Changes to Ambient Brightness may take multiple seconds to recompute global illumination - have patience. Recommended: set the 'Ambient' color swatch Luminance = 50."/>
+
+               <panel name="P_Ambient_Settings" follows="top|left" layout="topleft" top_pad="28" left="4" width="162" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
+                      <text name="T_Ambient_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="100">Atmosphere</text>
+               </panel>
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="ambient_scale_label">Sky</text>
+               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="blue_horizon" can_apply_immediately="true" tool_tip="Was 'Blue Horizon'"/>
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10"  name="haze_color_attributes_label">Haze</text>
+               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="blue_density" can_apply_immediately="true" tool_tip="Was 'Blue Density'"/>
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="2" left="10" name="haze_density_label">Density</text>
+               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="2" left="8"  decimal_digits="1" min_val="0"   max_val="5"   increment="0.1"  can_edit_text="true" name="haze_density" 
+                       tool_tip=""/>
+               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="2" left="10" name="haze_horizon_label">Altitude</text>
+               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="2" left="8"  decimal_digits="1" min_val="0.1" max_val="5"   increment="0.1"  can_edit_text="true" name="haze_horizon" 
+                       tool_tip="Haze Density must be > 0 for this to work."/>
+
+               <panel name="P_Ambient_Settings" follows="top|left" layout="topleft" top_pad="28" left="4" width="162" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
+                      <text name="T_Ambient_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="100">Clouds</text>
+               </panel>
+               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="cloud_color"   can_apply_immediately="true" />
+               <text   follows="left|top" height="10" width="100" layout="topleft" left="10" top_pad="4" name="cloud_coverage_label">Coverage</text>
+               <slider follows="left|top" height="16" width="150" layout="topleft" left="8"  top_pad="0" decimal_digits="2" increment="0.01" initial_value="0" min_val="0" max_val="1" can_edit_text="true" name="cloud_coverage"/>
+               <text   follows="left|top" height="10" width="100" layout="topleft" left="10" top_pad="2" name="cloud_scale_label">Scale</text>
+               <slider follows="left|top" height="16" width="150" layout="topleft" left="8"  top_pad="0" decimal_digits="2" increment="0.01" initial_value="0" min_val="0.01" max_val="3" can_edit_text="true" name="cloud_scale" />
+
+               <texture_picker follows="top|left" height="60" width="156" layout="topleft" top_pad="8" label_height="10" left="4" label="Cloud Image"  name="cloud_map"/>
+
+               <button         follows="top|left" height="26" width="108" layout="topleft" top_pad="20"                  left="30" label="Reset"        name="btn_reset" tool_tip="Close and reset to Shared Environment"/>
+            </layout_panel>
 
             <layout_panel top="100" border="false" name="lp_2" bevel_style="in" auto_resize="false" user_resize="false" visible="true" width="200" height="950">
 
-               <panel name="T_Glow_Settings" follows="top|left" layout="topleft" top_pad="8" left="2" width="194" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
-                       <text name="T_Glow_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="190">Light</text>
+               <panel name="T_Glow_Settings" follows="top|left" layout="topleft" top_pad="8" left="8" width="194" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
+                       <text name="T_Glow_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="190">Lights</text>
                </panel>
                <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="12" left="16" name="reflection_probe_ambiance_label">Reflection Probe Ambiance</text>
                <slider follows="top|left" height="16" width="180" layout="topleft" top_pad="0" left="8"  decimal_digits="1" min_val="0"   max_val="10"  increment="0.1"  can_edit_text="true" name="probe_ambiance" 
@@ -74,7 +150,7 @@
                         tool_tip="Reset to the default value."> <button.commit_callback function="ResetControl" parameter="RenderGlowWidth" /></button>
 
 
-            <panel name="P_Shadow_Settings" follows="top|left" layout="topleft" top_pad="22" left="2" width="194" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
+            <panel name="P_Shadow_Settings" follows="top|left" layout="topleft" top_pad="22" left="8" width="194" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
                         <text name="T_Shadow_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="190">Shadows</text>
             </panel>
 
@@ -120,6 +196,7 @@
             <button follows="left|top" name="Blur_Reset" height="22" label="D" layout="topleft" left_pad="0" top_delta="0" width="20" 
                         tool_tip="Reset to the default value."> <button.commit_callback function="ResetControl" parameter="RenderShadowBlurSize" /></button>
 
+<!-- NEEDS CODE SUPPORT -->
             <!-- RenderShadowGaussian X component -->
             <text name="T_Shd_Soften" follows="top|left" layout="topleft" left="18" top_pad="0" width="90">Shadow softness</text>
             <slider_bar name="SB_Shd_Soften" enabled_control="RenderDeferredSSAO" follows="top|left" height="16" increment="0.001" layout="topleft" left="12" min_val="0.001" max_val="3" top_delta="12" width="110" 
@@ -172,26 +249,41 @@ quickprefs.cpp:    LLVector3 renderSSAOEffect = gSavedSettings.getVector3("Rende
 quickprefs.cpp:    mSpinnerRenderSSAOEffectX->setValue(renderSSAOEffect.mV[VX]);
 quickprefs.cpp:    mSliderRenderSSAOEffectX->setValue(renderSSAOEffect.mV[VX]);
 quickprefs.cpp:    gSavedSettings.setVector3("RenderSSAOEffect", renderSSAOEffect);
-
 -->
+
+<!-- NEEDS CODE SUPPORT? -->
             <text name="T_Effect" follows="top|left" layout="topleft" left="18" top_pad="0" width="80">AO Luminance</text> 
-            <slider_bar name="SB_Effect" enabled_control="RenderDeferredSSAO" follows="top|left" height="16" increment="0.01" layout="topleft" left="12" min_val="-10" max_val="10" top_delta="12" width="110" 
+            <slider_bar name="SB_Effect" control_name="RenderSSAOEffect" enabled_control="RenderDeferredSSAO" follows="top|left" height="16" increment="0.01" layout="topleft" left="12" min_val="-10" max_val="10" top_delta="12" width="110" 
                         tool_tip="Controls the overall light occlusion.  Values of 0.0 and below provide more realistic results. Note: The spinner offers a larger range than the slider." />
-            <spinner name="S_Effect" enabled_control="RenderDeferredSSAO" top_delta="-3" label_width="0" left_pad="0" decimal_digits="2" follows="top|right" max_val="1000" min_val="-100" width="53" increment=".01"
+            <spinner name="S_Effect" control_name="RenderSSAOEffect" enabled_control="RenderDeferredSSAO" top_delta="-3" label_width="0" left_pad="0" decimal_digits="2" follows="top|right" max_val="1000" min_val="-100" width="53" increment=".01"
                         tool_tip="Controls the overall light occlusion.  Values of 0.0 and below provide more realistic results. Note: The spinner offers a larger range than the slider." />
             <button follows="left|top" name="Reset_Effect" height="22" label="D" layout="topleft" left_pad="0" top_delta="0" width="20" 
                         tool_tip="Reset to the default value." />
 
             <text name="T_Scaling_Factor" follows="top|left" layout="topleft" left="18" top_pad="0" width="80">AO Multiplier</text>
-            <slider_bar name="SB_Scaling_Factor" control_name="RenderSSAOFactor" enabled_control="RenderDeferredSSAO" follows="top|left" height="16" increment="0.01" layout="topleft" left="12" min_val="0" max_val="10" top_delta="12" width="110" 
+            <slider_bar name="SB_Scaling_Factor" control_name="RenderSSAOFactor" enabled_control="RenderDeferredSSAO" follows="top|left" height="16" increment="0.01" layout="topleft" left="12" min_val="0" max_val="100" top_delta="12" width="110" 
                         tool_tip="Scaling factor for the effect (larger is wider)." />
-            <spinner name="S_Scaling_Factor" control_name="RenderSSAOFactor" enabled_control="RenderDeferredSSAO" top_delta="-3" label_width="0" left_pad="0" decimal_digits="1" follows="top|right" max_val="100" min_val="0" width="53" increment="0.1"
+            <spinner name="S_Scaling_Factor" control_name="RenderSSAOFactor" enabled_control="RenderDeferredSSAO" top_delta="-3" label_width="0" left_pad="0" decimal_digits="1" follows="top|right" max_val="00" min_val="0" width="53" increment="0.1"
                         tool_tip="Scaling factor for the effect (larger is wider)." />
             <button follows="left|top" name="Reset_Scaling_Factor" height="22" label="D" layout="topleft" left_pad="0" top_delta="0" width="20" 
                         tool_tip="Reset to the default value."> <button.commit_callback function="ResetControl" parameter="RenderSSAOFactor"/> </button>
 
+<!--
+   <text name="T_I_Max" follows="top|left" layout="topleft" left="5" top_pad="5" tool_tip="Sets the maximum brightness limit for irradiance in Ambient Occlusion calculations. Acts as an upper cap to prevent overly bright areas from dominating the AO effect." width="70">Irrad. Max</text>
+   <slider_bar name="SB_I_Max" can_edit_text="true" control_name="RenderSSAOIrradianceMax" follows="left|right" height="16" increment="1" decimal_digits="0" layout="topleft" left_pad="0" min_val="0" max_val="10000" top_delta="-2" width="127" />
+   <spinner name="S_I_Max" can_edit_text="true" control_name="RenderSSAOIrradianceMax" top_delta="-3" label_width="0" left_pad="0" decimal_digits="0" follows="top|right" max_val="10000000" min_val="0" width="53" increment="1" border_visible="false" />
+   <button follows="left|top" name="Reset_I_Max" height="22" label="D" layout="topleft" left_pad="0" top_delta="0" width="20" tool_tip="Reset to the default value.">
+      <button.commit_callback function="ResetControl" parameter="RenderSSAOIrradianceMax" />
+   </button>
+   <text name="T_I_Scaling" follows="top|left" layout="topleft" left="5" top_pad="5" tool_tip="Controls the scaling of light irradiance within Ambient Occlusion, affecting how light intensity influences shadow darkness. Adjust for balanced lighting in bright scenes. " width="70">Irrad. Scale</text>
+   <slider_bar name="SB_I_Scaling" decimal_digits="2" can_edit_text="true" control_name="RenderSSAOIrradianceScale" follows="left|right" height="16" increment="1" layout="topleft" left_pad="0" min_val="0" max_val="100" top_delta="-2" width="127" />
+   <spinner name="S_I_Scaling" can_edit_text="true" control_name="RenderSSAOIrradianceScale" top_delta="-3" label_width="0" left_pad="0" decimal_digits="1" follows="top|right" max_val="100000" min_val="0" width="53" increment="0.5" border_visible="false" />
+   <button follows="left|top" name="Reset_I_Scaling" height="22" label="D" layout="topleft" left_pad="0" top_delta="0" width="20" tool_tip="Reset to the default value.">
+      <button.commit_callback function="ResetControl" parameter="RenderSSAOIrradianceScale" />
+   </button>
+-->
 
-      <panel name="PT_Reflections" follows="top|left" layout="topleft" top_pad="18" left="2" width="194" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
+      <panel name="PT_Reflections" follows="top|left" layout="topleft" top_pad="18" left="8" width="194" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
             <text name="T_Reflections_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" width="230">Reflections</text>
             </panel>
       <panel name="P_Reflections" follows="top|left" layout="topleft" top_pad="0" left="5" width="190" height="120" border_visible="false" background_visible="true">
@@ -298,90 +390,10 @@ quickprefs.cpp:// </FS:CR> FIRE-9630 - Vignette UI callbacks
 
 -->
 
-               <text      follows="top|left" height="10" width="180" layout="topleft" left="28" top_pad="44" name="camera_roll_hint"
+               <text      follows="top|left" height="10" width="180" layout="topleft" left="28" top_pad="40" name="camera_roll_hint"
                           tool_tip="Or see Preferences/Controls/Camera: Roll Left and Roll Right.">ALT-Q  :Camera roll:  ALT-E</text>
             </layout_panel>
 
-
-
-
-            <layout_panel border="false" name="lp_sun_moon_atmos" bevel_style="none" auto_resize="false" user_resize="false" height="850" width="164">
-               <tab_container follows="top|left" halign="center" name="tabs" layout="topleft" height="256" width="154" top="6" left="4" tab_group="0" tab_width="44" tab_position="top">
-                  <panel       follows="top|left" height="174" width="152" layout="topleft" border="false" name="sun_panel" bevel_style="in" auto_resize="false" user_resize="false" visible="true" font="SansSerifBold" label="Sun">
-                     <sun_moon_trackball follows="top|left" height="146" width="146" top="0" left="4" thumb_mode="sun" name="sun_rotation"/>
-                     <color_swatch follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="8" label_height="0" name="sun_color" can_apply_immediately="true"/>
-                     <text     follows="top|left" height="10" layout="topleft" top_pad="5" width="100" name="sun_elevation_label">Elevation</text>
-                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="-90" max_val="90" name="sun_elevation"  can_edit_text="true" />
-                     <text     follows="top|left" height="10" layout="topleft" top_pad="0" width="100" name="sunn_azimuth_label">Azimuth</text>
-                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="0"  max_val="359" name="sun_azimuth"    can_edit_text="true" />
-                  </panel>
-                  <panel       follows="top|left" height="174" width="152" layout="topleft" border="false" name="moon_panel" bevel_style="in" auto_resize="false" user_resize="false" visible="true" font="SansSerifBold" label="Moon">
-                     <sun_moon_trackball follows="top|left" height="146" width="146" top="0" left="4" thumb_mode="moon" name="moon_rotation"/>
-                     <color_swatch follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="8" label_height="0" name="moon_color" can_apply_immediately="true"/>
-                     <text     follows="top|left" height="10" layout="topleft" top_pad="5" width="100" name="moon_elevation_label">Elevation</text>
-                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="-90" max_val="90" name="moon_elevation" can_edit_text="true" />
-                     <text     follows="top|left" height="10" layout="topleft" top_pad="0" width="100" name="moon_azimuth_label">Azimuth</text>
-                     <slider   follows="top|left" height="16" layout="topleft" top_pad="4" width="150" decimal_digits="0" increment="1" min_val="0"  max_val="359" name="moon_azimuth"   can_edit_text="true" />
-                  </panel>
-               </tab_container>
-
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="haze_density_label">Intensity</text>
-               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="0" left="8"  decimal_digits="1" min_val="0"   max_val="50"  increment="0.1"  can_edit_text="true" name="RenderHDRSkySunlightScale" control_name="RenderHDRSkySunlightScale" 
-                       tool_tip="Sunlight Brightness. Recommended: set the 'Sun' color swatch Luminance = 50."/>
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10"  name="haze_focus_label">Glow focus</text>
-               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="0" left="8"  decimal_digits="2" min_val="-2" max_val="2.00" increment="0.01" can_edit_text="true" name="glow_focus" 
-                       tool_tip="When > 0, Sun Glow appears in haze or clouds.  For interesting effects, try &lt; 0."/>
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="haze_size_label">Glow intensity</text>
-               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="0" left="8"  decimal_digits="2" min_val="0"  max_val="1.99" increment="0.01" can_edit_text="true" name="glow_size" 
-                       tool_tip="Sun Glow Focus must not be 0 for this to have a visible effect."/>
-<!-- KS: code from panel_settings_sky_atmos.xml.  Hidden pending binding to pipeline.
-               <text   follows="left|top" height="10" width="160" layout="topleft" top_pad="6" left="10" name="density_multiplier_label">Density Multiplier</text>
-               <slider follows="left|top" height="16" width="170" layout="topleft" top_pad="2" left="8"  decimal_digits="4" min_val="0.0001" max_val="2" increment="0.0001" can_edit_text="true" name="density_multiplier" control_name="density_multiplier"
-                       tool_tip="Fog/haze/glow density."/>
-               <text   follows="left|top" height="10" width="160" layout="topleft" top_pad="6" left="10" name="distance_multiplier_label">Distance Multiplier</text>
-               <slider follows="left|top" height="16" width="170" layout="topleft" top_pad="0" left="8"  decimal_digits="2" min_val="0.05" max_val="1000" increment="0.01" can_edit_text="true" name="distance_multiplier" control_name="distance_multiplier"
-                       initial_value="0.8" tool_tip="Fog/haze/glow multiplier for distance."/>
-               <text   follows="left|top" height="10" width="160" layout="topleft" top_pad="6" left="10" name="maximum_altitude_label">Maximum Altitude</text>
-               <slider follows="left|top" height="16" width="170" layout="topleft" top_pad="0" left="8"  decimal_digits="1" min_val="0" max_val="10000"  increment="0.1"   can_edit_text="true" name="max_alt" 
-                       tool_tip="fog/haze/glow maximum altitude."/>
--->
-
-
-               <panel name="P_Ambient_Settings" follows="top|left" layout="topleft" top_pad="28" left="4" width="162" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
-                      <text name="T_Ambient_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="100">Ambient</text>
-               </panel>
-               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="ambient_light" can_apply_immediately="true" />
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="ambient_scale_label">Intensity</text>
-               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="2" left="8" decimal_digits="1" min_val="-10" max_val="40"  increment="0.1"  can_edit_text="true" name="RenderSkyAmbientScale" control_name="RenderSkyAmbientScale"
-                       tool_tip="Changes to Ambient Brightness may take multiple seconds to recompute global illumination - have patience. Recommended: set the 'Ambient' color swatch Luminance = 50."/>
-
-               <panel name="P_Ambient_Settings" follows="top|left" layout="topleft" top_pad="28" left="4" width="162" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
-                      <text name="T_Ambient_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="100">Atmosphere</text>
-               </panel>
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10" name="ambient_scale_label">Sky</text>
-               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="blue_horizon" can_apply_immediately="true" tool_tip="Was 'Blue Horizon'"/>
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="6" left="10"  name="haze_color_attributes_label">Haze</text>
-               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="blue_density" can_apply_immediately="true" tool_tip="Was 'Blue Density'"/>
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="2" left="10" name="haze_density_label">Density</text>
-               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="2" left="8"  decimal_digits="1" min_val="0"   max_val="5"   increment="0.1"  can_edit_text="true" name="haze_density" 
-                       tool_tip=""/>
-               <text   follows="top|left" height="10" width="180" layout="topleft" top_pad="2" left="10" name="haze_horizon_label">Altitude</text>
-               <slider follows="top|left" height="16" width="150" layout="topleft" top_pad="2" left="8"  decimal_digits="1" min_val="0.1" max_val="5"   increment="0.1"  can_edit_text="true" name="haze_horizon" 
-                       tool_tip="Haze Density must be > 0 for this to work."/>
-
-               <panel name="P_Ambient_Settings" follows="top|left" layout="topleft" top_pad="28" left="4" width="162" height="22" bg_alpha_color="Phototools_Header" border_visible="true" border_thickness="1" background_visible="true">
-                      <text name="T_Ambient_Settings" follows="left|top" layout="topleft" left="10" font="SansSerif" height="17" width="100">Clouds</text>
-               </panel>
-               <color_swatch   follows="top|left" height="20" width="156" layout="topleft" left="4" top_pad="4" label_height="0" name="cloud_color"   can_apply_immediately="true" />
-               <text   follows="left|top" height="10" width="100" layout="topleft" left="10" top_pad="4" name="cloud_coverage_label">Coverage</text>
-               <slider follows="left|top" height="16" width="150" layout="topleft" left="8"  top_pad="0" decimal_digits="2" increment="0.01" initial_value="0" min_val="0" max_val="1" can_edit_text="true" name="cloud_coverage"/>
-               <text   follows="left|top" height="10" width="100" layout="topleft" left="10" top_pad="2" name="cloud_scale_label">Scale</text>
-               <slider follows="left|top" height="16" width="150" layout="topleft" left="8"  top_pad="0" decimal_digits="2" increment="0.01" initial_value="0" min_val="0.01" max_val="3" can_edit_text="true" name="cloud_scale" />
-
-               <texture_picker follows="top|left" height="60" width="156" layout="topleft" top_pad="8" label_height="10" left="4" label="Cloud Image"  name="cloud_map"/>
-
-               <button         follows="top|left" height="26" width="108" layout="topleft" top_pad="26"                  left="30" label="Reset"        name="btn_reset" tool_tip="Close and reset to Shared Environment"/>
-            </layout_panel>
 
          </layout_stack>
       </layout_panel>

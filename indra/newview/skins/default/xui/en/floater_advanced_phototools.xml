@@ -144,7 +144,7 @@
       </panel>
 
       <panel name="P_C_Aids" follows="top|left" layout="topleft" top_pad="0" left="4" width="275" height="100" border_visible="true" background_visible="true">
-            <check_box follows="left|top" height="16" label="Allow the camera to move w/o constraints" layout="topleft" left="7" top_pad="16" name="ignorecameraconstraints" width="250" control_name="FSIgnoreSimulatorCameraConstraints" 
+            <check_box follows="left|top" height="16" label="Allow the camera to move w/o constraints" layout="topleft" left="7" top_pad="16" name="ignorecameraconstraints" width="250" control_name="DisableCameraConstraints" 
                        tool_tip="Ignores the 'push' the simulator applies to your camera to keep it out of objects. REQUIRES RESTART!" />
             <check_box follows="left|top" height="16" label="Reset camera position on avatar movement" layout="topleft" left="7" name="resetcamerapositiononmovement" width="250" control_name="FSResetCameraOnMovement" 
                        tool_tip="Resets the camera to its default position when you move the avatar" />
