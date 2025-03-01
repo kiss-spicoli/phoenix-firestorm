@@ -1404,7 +1404,9 @@ void LLPanelProfileSecondLife::fillAccountStatus(const LLAvatarData* avatar_data
         std::string text;
         if (flags & (FSData::DEVELOPER | FSData::SUPPORT | FSData::QA | FSData::GATEWAY))
         {
-            args["[FIRESTORM]"] = LLTrans::getString("APP_NAME");
+            // <AS:Chanayane> This is to avoid having Firestorm developers having the "AyaneStorm Developer" tag
+            //args["[FIRESTORM]"] = LLTrans::getString("APP_NAME");
+            args["[FIRESTORM]"] = "Firestorm";
         }
 
         if (flags & FSData::DEVELOPER)
@@ -2130,14 +2132,14 @@ void LLPanelProfileSecondLife::onCommitMenu(const LLSD& userdata)
                 mDiscardDescriptionChanges->setEnabled(false);
             }
             mOriginalDescriptionText = mDescriptionEdit->getValue().asString();
-            mDescriptionEdit->setValue(mOriginalDescriptionText);
+            reparseDescriptionText(mOriginalDescriptionText);
         } else {
             mPreviewButton->setImageOverlay("Profile_Group_Visibility_On");
             if (mHasUnsavedDescriptionChanges) {
                 mSaveDescriptionChanges->setEnabled(true);
                 mDiscardDescriptionChanges->setEnabled(true);
             }
-            mDescriptionEdit->setValue(mOriginalDescriptionText);
+            reparseDescriptionText(mOriginalDescriptionText);
         }
     }
     // </AS:Chanayane>
@@ -2258,6 +2260,13 @@ void LLPanelProfileSecondLife::setDescriptionText(const std::string &text)
     mDescriptionText = text;
     mDescriptionEdit->setValue(mDescriptionText);
 }
+
+// <AS:Chanayane> Preview button
+void LLPanelProfileSecondLife::reparseDescriptionText(const std::string &text)
+{
+    mDescriptionEdit->reparseValue(text);
+}
+// </AS:Chanayane>
 
 void LLPanelProfileSecondLife::onSetDescriptionDirty()
 {
@@ -2763,6 +2772,7 @@ void LLPanelProfileFirstLife::onOpen(const LLSD& key)
         mDescriptionEdit->setTabStop(false);
     }
     mPreviewButton->setVisible(getSelfProfile()); // <AS:Chanayane> Preview button
+    mDescriptionEdit->setParseHTML(!getSelfProfile()); // <AS:Chanayane> Fix FIRE-35185 (disables link rendering while editing picks or 1st life)
 
     // <FS:Zi> Allow proper texture swatch handling
     mPicture->setEnabled(getSelfProfile());
@@ -2936,6 +2946,13 @@ void LLPanelProfileFirstLife::setDescriptionText(const std::string &text)
     mDescriptionEdit->setValue(mCurrentDescription);
 }
 
+// <AS:Chanayane> Preview button
+void LLPanelProfileFirstLife::reparseDescriptionText(const std::string &text)
+{
+    mDescriptionEdit->reparseValue(text);
+}
+// </AS:Chanayane>
+
 void LLPanelProfileFirstLife::onSetDescriptionDirty()
 {
     mSaveChanges->setEnabled(true);
@@ -3007,14 +3024,14 @@ void LLPanelProfileFirstLife::onClickPreview()
             mDiscardChanges->setEnabled(false);
         }
         mOriginalDescription = mDescriptionEdit->getValue().asString();
-        mDescriptionEdit->setValue(mOriginalDescription);
+        reparseDescriptionText(mOriginalDescription);
     } else {
         mPreviewButton->setImageOverlay("Profile_Group_Visibility_On");
         if (mHasUnsavedChanges) {
             mSaveChanges->setEnabled(true);
             mDiscardChanges->setEnabled(true);
         }
-        mDescriptionEdit->setValue(mOriginalDescription);
+        reparseDescriptionText(mOriginalDescription);
     }
 }
 // </AS:Chanayane>

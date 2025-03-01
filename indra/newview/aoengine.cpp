@@ -1027,8 +1027,7 @@ void AOEngine::playAnimation(const LLUUID& animation)
     U32 idx = -1;
     for (U32 i = 0; i < state->mAnimations.size(); i++)
     {
-        LLUUID* id = &(state->mAnimations[i].mAssetUUID);
-        if (*id == newAnimation)
+        if (state->mAnimations[i].mAssetUUID == newAnimation)
         {
             idx = i;
             break;
@@ -1063,6 +1062,10 @@ void AOEngine::playAnimation(const LLUUID& animation)
 const AOSet* AOEngine::getCurrentSet() const
 {
     return mCurrentSet;
+}
+const AOSet::AOState* AOEngine::getCurrentState() const
+{
+    return mCurrentSet->getStateByRemapID(mLastMotion);
 }
 // </AS:Chanayane>
 
@@ -1626,7 +1629,7 @@ void AOEngine::update()
                         }
                         else if (state_params[num].substr(0, 2) == "CT")
                         {
-                            LLStringUtil::convertToS32(state_params[num].substr(2, state_params[num].size() - 2), state->mCycleTime);
+                            LLStringUtil::convertToF32(state_params[num].substr(2, state_params[num].size() - 2), state->mCycleTime);
                             LL_DEBUGS("AOEngine") << "Cycle Time specified:" << state->mCycleTime << LL_ENDL;
                         }
                         else
@@ -1825,12 +1828,9 @@ bool AOEngine::renameSet(AOSet* set, const std::string& name)
 void AOEngine::saveState(const AOSet::AOState* state)
 {
     std::string stateParams = state->mName;
-    F32 time = (F32)state->mCycleTime;
-    if (time > 0.0f)
+    if (state->mCycleTime > 0.0f)
     {
-        std::ostringstream timeStr;
-        timeStr << ":CT" << state->mCycleTime;
-        stateParams += timeStr.str();
+        stateParams += llformat(":CT%.2f", state->mCycleTime);
     }
     if (state->mCycle)
     {
@@ -2038,7 +2038,7 @@ void AOEngine::setRandomize(AOSet::AOState* state, bool randomize)
 
 void AOEngine::setCycleTime(AOSet::AOState* state, F32 time)
 {
-    state->mCycleTime = (S32)time;
+    state->mCycleTime = time;
     state->mDirty = true;
 }
 

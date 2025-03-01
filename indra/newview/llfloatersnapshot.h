@@ -67,8 +67,9 @@ public:
     class ImplBase;
     friend class ImplBase;
     ImplBase* impl;
-
+    S32 getOriginalHeight() const { return mOriginalHeight; }
 protected:
+    S32       mOriginalHeight;
     LLUICtrl* mThumbnailPlaceholder;
     LLUICtrl *mRefreshBtn, *mRefreshLabel;
     LLUICtrl *mSucceessLblPanel, *mFailureLblPanel;
@@ -122,7 +123,7 @@ public:
     virtual EStatus getStatus() const { return mStatus; }
     virtual void setNeedRefresh(bool need);
 
-    static bool updatePreviewList(bool initialized);
+    static bool updatePreviewList(bool initialized, bool have_flickr = false); // <FS:Beq/> FIRE-35002 - Post to flickr broken, improved solution
 
     void setAdvanced(bool advanced) { mAdvanced = advanced; }
     void setSkipReshaping(bool skip) { mSkipReshaping = skip; }
